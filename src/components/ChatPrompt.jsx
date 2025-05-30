@@ -12,6 +12,7 @@ const ChatPrompt = ({ user }) => {
     },
     {
       role: 'user',
+      name: user,
       content: `Hola, soy ${user}.`
     }
   ]);
@@ -51,6 +52,7 @@ const ChatPrompt = ({ user }) => {
       ...prev,
       {
         role: 'user',
+        name: user,
         content: `Mi perfil:\n${preguntasFormulario.map(q => `- ${q.label}: ${formulario[q.name] || ''}`).join('\n')}`
       },
       {
@@ -91,7 +93,7 @@ const ChatPrompt = ({ user }) => {
       setIsLoading(true);
       const newConversations = [
         ...conversations,
-        { role: 'user', content: text }
+        { role: 'user', name: user, content: text }
       ];
       setConversations(newConversations);
       setPrompt('');
@@ -108,7 +110,7 @@ const ChatPrompt = ({ user }) => {
       console.error('Error al obtener respuesta:', error);
       setConversations([
         ...conversations,
-        { role: 'user', content: text },
+        { role: 'user', name: user, content: text },
         { role: 'system', content: 'Hubo un error. Intenta de nuevo.' }
       ]);
     } finally {
@@ -145,6 +147,17 @@ const ChatPrompt = ({ user }) => {
                     : 'bg-gray-100 text-gray-800 border border-purple-200 rounded-tl-none'
                 }`}
               >
+                <div className="flex items-center mb-2 font-medium">
+                  {message.role === 'user' ? (
+                    <>
+                      <FaUser className="mr-2 text-white" /> <span className="text-white font-bold">{message.name || 'Tú'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <FaRobot className="mr-2 text-purple-600" /> <span className="text-purple-800">CBUM</span>
+                    </>
+                  )}
+                </div>
                 <div className="whitespace-pre-wrap leading-relaxed text-sm md:text-base">
                   {message.content}
                 </div>
