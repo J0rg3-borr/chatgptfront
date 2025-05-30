@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { FaPaperPlane, FaRobot } from 'react-icons/fa';
+import { FaPaperPlane, FaRobot, FaUser } from 'react-icons/fa';
 
 const ChatPrompt = ({ user }) => {
   const [prompt, setPrompt] = useState('');
@@ -9,6 +9,10 @@ const ChatPrompt = ({ user }) => {
     {
       role: 'assistant',
       content: `¡Bienvenido, ${user}! Estás listo para llevar tu físico al siguiente nivel. 💪\n\nAntes de armar tu plan, necesito conocerte mejor. Por favor, completa el siguiente formulario con tus datos clave: objetivo, edad, peso, altura, nivel de actividad, preferencias alimenticias y frecuencia de entrenamiento.`
+    },
+    {
+      role: 'user',
+      content: `Hola, soy ${user}.`
     }
   ]);
   const [mostrarFormulario, setMostrarFormulario] = useState(true);
