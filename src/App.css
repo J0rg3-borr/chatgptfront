@@ -108,7 +108,6 @@ p {
 
 /* Efecto de brillo para botones */
 button:not(:disabled)::after {
-  content: '';
   position: absolute;
   top: 0;
   left: 0;
